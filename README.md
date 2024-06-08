@@ -9,7 +9,12 @@
 - Clone the repository to your local machine
 - Unzip the project and open it with your favourite editor
 - Run the project
-- Or you can run the JAR in the \out\artifacts\Minesweeper_jar\Minesweeper.jar folder. For example on windows cmd, to run the JAR you enter (java -jar .\out\artifacts\Minesweeper_jar\Minesweeper.jar )
+- Or you can run the JAR in the \out\artifacts\Minesweeper_jar\Minesweeper.jar folder e.g on windows cmd, to run the JAR enter: 
+
+```
+java -jar .\out\artifacts\Minesweeper_jar\Minesweeper.jar
+```
+
 
 - ## Credits
 
