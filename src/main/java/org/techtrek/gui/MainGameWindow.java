@@ -95,7 +95,7 @@ public class MainGameWindow extends JPanel implements ActionListener {
         gameArea = new JPanel();
         gameArea.setBackground(Color.green);
         //draw to the board
-        board = new Board(gameArea, gridSizeX, gridSizeY,gameTimer);
+        board = new Board(gameArea, gridSizeX, gridSizeY,gameTimer, numberOfMines);
         add(gameArea, BorderLayout.CENTER);
     }
 

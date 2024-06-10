@@ -13,6 +13,7 @@ public class Board implements ActionListener {
 
     int gridSizeX;
     int gridSizeY;
+    int numberOfMines;
     JPanel panel;
 
     Timer timer;
@@ -30,12 +31,13 @@ public class Board implements ActionListener {
 
     //remove old mines map, put fresh random map
     private void placeMines() {
-        new MinePlacer(fields);
+        new MinePlacer(fields, numberOfMines, gridSizeX, gridSizeY);
     }
 
-    public Board(JPanel panel, int gridSizeX, int gridSizeY, JLabel timerLabel) {
+    public Board(JPanel panel, int gridSizeX, int gridSizeY, JLabel timerLabel, int numberOfMInes) {
         this.panel = panel;
         this.gridSizeY = gridSizeY;
+        this.numberOfMines = numberOfMInes;
         this.gridSizeX = gridSizeX;
         this.timerLabel = timerLabel;
         panel.setLayout(new GridLayout(gridSizeX, gridSizeY));
@@ -65,7 +67,5 @@ public class Board implements ActionListener {
             placeMines();
             notClicked = false;
         }
-        
     }
-
 }
