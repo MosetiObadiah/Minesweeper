@@ -100,7 +100,7 @@ public class MainGameWindow extends JPanel implements ActionListener {
         Window window = SwingUtilities.getWindowAncestor(this);
         if(clickedBtn == helpBtn) {
             String message = "<html>For tutorial, visit: <a href=\"https://en.wikipedia.org/wiki/Minesweeper_(video_game)\">Wikipedia</a><br>" +
-                    "For bug report visit: <a href=\"www.github.com/Minesweeper\">GitHub</a></html>";
+                    "For bug report visit: <a href=\"https://github.com/MosetiObadiah/Minesweeper/issues\">GitHub</a></html>";
 
             JOptionPane.showMessageDialog( window, message, "Minesweeper Information", JOptionPane.INFORMATION_MESSAGE);
 
@@ -110,4 +110,3 @@ public class MainGameWindow extends JPanel implements ActionListener {
         }
     }
 }
-
