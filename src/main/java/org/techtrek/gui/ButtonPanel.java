@@ -3,7 +3,6 @@ package org.techtrek.gui;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -29,7 +28,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
         Object clickedBtn = e.getSource();
 
         if (clickedBtn == buttons[0]) {
-            //TODO add new game Logic
+            //TODO add new game
 
         } else if (clickedBtn == buttons[1]) {
             showDialog.dialog(SwingUtilities.getWindowAncestor(this), "High Score", new HighScorePanel());

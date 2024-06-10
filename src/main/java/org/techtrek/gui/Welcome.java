@@ -14,6 +14,15 @@ public class Welcome extends JPanel implements ActionListener {
     int gridSizeX;
 
     int gridSizeY;
+
+    public int getNumberOfMines() {
+        return numberOfMines;
+    }
+
+    public void setNumberOfMines(int numberOfMines) {
+        this.numberOfMines = numberOfMines;
+    }
+
     Frame frame;
 
     JLabel title = new JLabel("Minesweeper");

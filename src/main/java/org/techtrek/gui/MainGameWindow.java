@@ -18,10 +18,14 @@ public class MainGameWindow extends JPanel implements ActionListener {
 
     JButton gameOptionsBtn;
     JButton helpBtn;
+    JButton resetFieldBtn;
 
     JLabel gameTimer;
     JLabel gameEmoji;
     JLabel displayNumberOfMines;
+
+    Board board;
+    JPanel gameArea;
 
     public MainGameWindow(int numberOfMines, int gridSizeX, int gridSizeY) {
         this.numberOfMines = numberOfMines;
@@ -37,7 +41,8 @@ public class MainGameWindow extends JPanel implements ActionListener {
 
         gameOptionsBtn = new JButton("Game");
         helpBtn = new JButton("Help");
-        JButton[] gameBarBtns = {gameOptionsBtn, helpBtn};
+        resetFieldBtn = new JButton("Reset");
+        JButton[] gameBarBtns = {gameOptionsBtn, helpBtn, resetFieldBtn};
         for(JButton button: gameBarBtns) {
             button.addActionListener(this);
             button.setContentAreaFilled(false);
@@ -68,9 +73,9 @@ public class MainGameWindow extends JPanel implements ActionListener {
         gameStatus.setPreferredSize(new Dimension(500, 30));
         gameStatus.setLayout(new MigLayout("insets 0, gap 10"));
 
-        JLabel gameTimer = new JLabel("00:00");
-        JLabel gameEmoji = new JLabel("Emoji");
-        JLabel displayNumberOfMines = new JLabel("Mines: " + numberOfMines);
+        gameTimer = new JLabel("00:00");
+        gameEmoji = new JLabel("Emoji");
+        displayNumberOfMines = new JLabel("Mines: " + numberOfMines);
 
         JLabel[] labels = {gameTimer, gameEmoji, displayNumberOfMines};
         for (JLabel label: labels) {
@@ -87,10 +92,10 @@ public class MainGameWindow extends JPanel implements ActionListener {
 
         add(topPanel, BorderLayout.NORTH);
 
-        JPanel gameArea = new JPanel();
+        gameArea = new JPanel();
         gameArea.setBackground(Color.green);
         //draw to the board
-        new Board(gameArea, gridSizeX, gridSizeY,gameTimer);
+        board = new Board(gameArea, gridSizeX, gridSizeY,gameTimer);
         add(gameArea, BorderLayout.CENTER);
     }
 
@@ -98,15 +103,18 @@ public class MainGameWindow extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object clickedBtn = e.getSource();
         Window window = SwingUtilities.getWindowAncestor(this);
+        //TODO make the links in help clickable
         if(clickedBtn == helpBtn) {
             String message = "<html>For tutorial, visit: <a href=\"https://en.wikipedia.org/wiki/Minesweeper_(video_game)\">Wikipedia</a><br>" +
                     "For bug report visit: <a href=\"https://github.com/MosetiObadiah/Minesweeper/issues\">GitHub</a></html>";
 
             JOptionPane.showMessageDialog( window, message, "Minesweeper Information", JOptionPane.INFORMATION_MESSAGE);
 
-
         } else if (clickedBtn == gameOptionsBtn) {
             new ShowDialog().dialog(window, "Menu", new ButtonPanel());
+
+        } else if (clickedBtn == resetFieldBtn) {
+            //TODO add reset Logic
         }
     }
 
