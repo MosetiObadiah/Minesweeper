@@ -1,10 +1,13 @@
 package org.techtrek.logic;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class Board implements ActionListener {
 
@@ -16,6 +19,19 @@ public class Board implements ActionListener {
     int elapsedTime;
     String timeFormatted;
     JLabel timerLabel;
+    boolean notClicked = true;
+
+    JButton[] fields;
+
+    public void setNotClicked(boolean notClicked) {
+        this.notClicked = notClicked;
+        placeMines();
+    }
+
+    //remove old mines map, put fresh random map
+    private void placeMines() {
+        new MinePlacer(fields);
+    }
 
     public Board(JPanel panel, int gridSizeX, int gridSizeY, JLabel timerLabel) {
         this.panel = panel;
@@ -26,9 +42,9 @@ public class Board implements ActionListener {
 
         int numberOfButtons = gridSizeX * gridSizeY;
 
-        JButton[] fields = new JButton[numberOfButtons];
+        fields = new JButton[numberOfButtons];
         for (int i = 0; i < numberOfButtons; i++) {
-            fields[i] = new JButton(String.valueOf(i + 1));
+            fields[i] = new JButton();
             fields[i].addActionListener(this);
             panel.add(fields[i]);
         }
@@ -45,6 +61,10 @@ public class Board implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         timer.start();
+        if(notClicked) {
+            placeMines();
+            notClicked = false;
+        }
         
     }
 

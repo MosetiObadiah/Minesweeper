@@ -10,6 +10,7 @@ public class Main {
     public static void main(String[] args) {
         Frame frame = new Frame();
         try {
+            //TODO add an option to change themes
             UIManager.setLookAndFeel(new FlatMacLightLaf());
         } catch (UnsupportedLookAndFeelException e) {
             throw new RuntimeException(e);
