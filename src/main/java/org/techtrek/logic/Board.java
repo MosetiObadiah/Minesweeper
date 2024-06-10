@@ -40,14 +40,8 @@ public class Board implements ActionListener {
         });
     }
 
-    private void startTimer() {
-        if (!timer.isRunning()) {
-            timer.start();
-        }
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        startTimer();
+        timer.start();
     }
 }

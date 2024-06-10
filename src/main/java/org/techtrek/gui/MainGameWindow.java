@@ -1,11 +1,11 @@
 package org.techtrek.gui;
 
 import net.miginfocom.swing.MigLayout;
+
 import org.techtrek.logic.Board;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -109,4 +109,6 @@ public class MainGameWindow extends JPanel implements ActionListener {
             new ShowDialog().dialog(window, "Menu", new ButtonPanel());
         }
     }
+
+  
 }
