@@ -68,7 +68,7 @@ public class MainGameWindow extends JPanel implements ActionListener {
         gameStatus.setPreferredSize(new Dimension(500, 30));
         gameStatus.setLayout(new MigLayout("insets 0, gap 10"));
 
-        JLabel gameTimer = new JLabel("00.00");
+        JLabel gameTimer = new JLabel("00:00");
         JLabel gameEmoji = new JLabel("Emoji");
         JLabel displayNumberOfMines = new JLabel("Mines: " + numberOfMines);
 
@@ -90,7 +90,7 @@ public class MainGameWindow extends JPanel implements ActionListener {
         JPanel gameArea = new JPanel();
         gameArea.setBackground(Color.green);
         //draw to the board
-        new Board(gameArea, gridSizeX, gridSizeY);
+        new Board(gameArea, gridSizeX, gridSizeY,gameTimer);
         add(gameArea, BorderLayout.CENTER);
     }
 
