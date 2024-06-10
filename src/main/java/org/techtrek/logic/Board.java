@@ -4,12 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class Board implements ActionListener {
 
     int gridSizeX;
     int gridSizeY;
     JPanel panel;
+
     Timer timer;
     int elapsedTime;
     String timeFormatted;
@@ -43,5 +45,7 @@ public class Board implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         timer.start();
+        
     }
+
 }
