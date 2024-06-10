@@ -3,8 +3,13 @@ package org.techtrek.gui;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Statistics extends JPanel {
+public class Statistics extends JPanel implements ActionListener {
+    JButton closeBtn;
+    JButton resetBtn;
+
     public Statistics() {
         super();
         setLayout(new MigLayout());
@@ -39,9 +44,22 @@ public class Statistics extends JPanel {
         JLabel currentLosses = new JLabel("Current Losses: 0");
         add(currentLosses, "wrap");
 
-        JButton closeBtn = new JButton("Close");
-        JButton resetBtn = new JButton("Reset");
+        closeBtn = new JButton("Close");
+        resetBtn = new JButton("Reset");
+
+        closeBtn.addActionListener(this);
+        resetBtn.addActionListener(this);
+
         add(closeBtn, "split 2, gapx 20");
         add(resetBtn);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == closeBtn) {
+            //TODO close the dialog
+        } else if (e.getSource() == resetBtn) {
+            //TODO reset user inputs
+        }
     }
 }
