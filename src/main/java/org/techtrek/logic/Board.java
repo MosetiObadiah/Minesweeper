@@ -1,47 +1,25 @@
 package org.techtrek.logic;
 
-import org.techtrek.panels.GameWindow;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class Board {
-    JButton[] fields;
-    Boolean areButtonsEnabled;
-    GameWindow gameWindow;
+    int gridSizeX;
+    int gridSizeY;
+    JPanel panel;
 
-    public Board(JPanel panel, int mines, int gridSize, GameWindow gameWindow) {
-        panel.setLayout(new GridLayout(gridSize, gridSize, 1, 2));
-        this.gameWindow = gameWindow;
+    public Board(JPanel panel, int gridSizeX, int gridSizeY) {
+        this.gridSizeY = gridSizeY;
+        this.gridSizeX = gridSizeX;
+        panel.setLayout(new GridLayout(gridSizeX, gridSizeY));
 
-        int numberOfFields = gridSize * gridSize;
+        int numberOfButtons = gridSizeX * gridSizeY;
 
-        fields = new JButton[numberOfFields];
-        for (int i = 0; i < numberOfFields; i++) {
-            fields[i] = new JButton();
-            fields[i].setPreferredSize(new Dimension(07,47));
-            //on click remove any hovered panels and show game area
-            fields[i].addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    super.mouseClicked(e);
-                    //System.out.println("Disabled button clicked!");
-                    disableAllButtons(true);
-                    gameWindow.hidePanels();
-                }
-            });
+        JButton[] fields = new JButton[numberOfButtons];
+        for(int i  = 0; i < numberOfButtons; i++) {
+            fields[i] = new JButton(String.valueOf(i+1));
             panel.add(fields[i]);
+        }
 
-        }
-    }
-    public void disableAllButtons(Boolean areButtonsEnabled) {
-        this.areButtonsEnabled = areButtonsEnabled;
-        for(JButton button: fields) {
-            button.setEnabled(areButtonsEnabled);
-        }
     }
 }
