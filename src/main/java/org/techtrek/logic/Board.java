@@ -25,6 +25,8 @@ public class Board implements ActionListener {
     JButton[][] fields;
     int position;
 
+    MinePlacer minePlacer;
+
     public void setNotClicked(boolean notClicked) {
         this.notClicked = notClicked;
         placeMines();
@@ -32,7 +34,7 @@ public class Board implements ActionListener {
 
     //remove old mines map, put fresh random map
     private void placeMines() {
-        new MinePlacer(fields, numberOfMines, gridSizeX, gridSizeY);
+        minePlacer = new MinePlacer(fields, numberOfMines, gridSizeX, gridSizeY);
     }
 
     public Board(JPanel panel, int gridSizeX, int gridSizeY, JLabel timerLabel, int numberOfMInes) {
@@ -70,5 +72,6 @@ public class Board implements ActionListener {
             placeMines();
             notClicked = false;
         }
+        minePlacer.checkIfUserClickedMine(notClicked, (JButton) e.getSource());
     }
 }
