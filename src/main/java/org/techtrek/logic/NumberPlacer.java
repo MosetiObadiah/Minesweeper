@@ -107,7 +107,7 @@ public class NumberPlacer {
 
     private void addCorrectNumbers(int i, int j) {
         buttons[i][j].setFont(new Font("Comic Sans MS", Font.BOLD, 15));
-        buttons[i][j].setText(String.valueOf(count));
+       // buttons[i][j].setText(String.valueOf(count));
         count = 0;
     }
 

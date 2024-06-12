@@ -15,7 +15,7 @@ public class MinePlacer {
 
     JButton[][] buttons;
 
-    public MinePlacer(JButton[][] buttons, int numberOfMines, int gridSizeX, int gridSizeY) {
+    public MinePlacer(JButton[][] buttons, int numberOfMines, int gridSizeX, int gridSizeY, String buttonPosition) {
         this.gridSizeX = gridSizeX;
         this.gridSizeY = gridSizeY;
         this.numberOfMines = numberOfMines;
