@@ -27,6 +27,8 @@ public class Board implements ActionListener {
 
     MinePlacer minePlacer;
 
+    String CLickedBtnPosition;
+
     public void setNotClicked(boolean notClicked) {
         this.notClicked = notClicked;
         placeMines();
@@ -34,7 +36,7 @@ public class Board implements ActionListener {
 
     //remove old mines map, put fresh random map
     private void placeMines() {
-        minePlacer = new MinePlacer(fields, numberOfMines, gridSizeX, gridSizeY);
+        minePlacer = new MinePlacer(fields, numberOfMines, gridSizeX, gridSizeY, CLickedBtnPosition);
     }
 
     public Board(JPanel panel, int gridSizeX, int gridSizeY, JLabel timerLabel, int numberOfMInes) {
@@ -45,12 +47,10 @@ public class Board implements ActionListener {
         this.timerLabel = timerLabel;
         panel.setLayout(new GridLayout(gridSizeX, gridSizeY));
 
-        int numberOfButtons = gridSizeX * gridSizeY;
-
         fields = new JButton[gridSizeX][gridSizeY];
         for (int i = 0; i < gridSizeX; i++) {
            for(int j = 0; j < gridSizeY; j++){
-               fields[i][j] = new JButton();
+               fields[i][j] = new JButton(String.valueOf(i * 9 + j));
                fields[i][j].addActionListener(this);
                panel.add(fields[i][j]);
            }
@@ -67,11 +67,15 @@ public class Board implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        System.out.println(((JButton) e.getSource()).getText());
         timer.start();
         if(notClicked) {
             placeMines();
+            CLickedBtnPosition = ((JButton) e.getSource()).getText();
             notClicked = false;
         }
+        //TODO not clicked below not working, fix
         minePlacer.checkIfUserClickedMine(notClicked, (JButton) e.getSource());
     }
 }
