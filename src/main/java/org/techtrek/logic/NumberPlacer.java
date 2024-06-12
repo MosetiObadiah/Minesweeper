@@ -101,7 +101,6 @@ public class NumberPlacer {
                     checkWest(i, j);
                     addCorrectNumbers(i, j);
                 }
-
             }
         }
     }
