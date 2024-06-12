@@ -1,6 +1,6 @@
 package org.techtrek.logic;
 
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,7 +22,8 @@ public class Board implements ActionListener {
     JLabel timerLabel;
     boolean notClicked = true;
 
-    JButton[] fields;
+    JButton[][] fields;
+    int position;
 
     public void setNotClicked(boolean notClicked) {
         this.notClicked = notClicked;
@@ -44,11 +45,13 @@ public class Board implements ActionListener {
 
         int numberOfButtons = gridSizeX * gridSizeY;
 
-        fields = new JButton[numberOfButtons];
-        for (int i = 0; i < numberOfButtons; i++) {
-            fields[i] = new JButton();
-            fields[i].addActionListener(this);
-            panel.add(fields[i]);
+        fields = new JButton[gridSizeX][gridSizeY];
+        for (int i = 0; i < gridSizeX; i++) {
+           for(int j = 0; j < gridSizeY; j++){
+               fields[i][j] = new JButton();
+               fields[i][j].addActionListener(this);
+               panel.add(fields[i][j]);
+           }
         }
 
         timer = new Timer(1000, (ActionEvent e) -> {

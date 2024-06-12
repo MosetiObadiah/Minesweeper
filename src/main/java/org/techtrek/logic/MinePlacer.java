@@ -13,13 +13,10 @@ public class MinePlacer {
     int gridSizeX;
     int gridSizeY;
 
-    public MinePlacer(JButton[] buttons, int numberOfMines, int gridSizeX, int gridSizeY) {
+    public MinePlacer(JButton[][] buttons, int numberOfMines, int gridSizeX, int gridSizeY) {
         this.gridSizeX = gridSizeX;
         this.gridSizeY = gridSizeY;
         this.numberOfMines = numberOfMines;
-
-        System.out.println(gridSizeX);
-        System.out.println(gridSizeY);
 
         Boolean[][] isABtnAMine = new Boolean[gridSizeX][gridSizeY];
         
@@ -41,15 +38,16 @@ public class MinePlacer {
 
         img = new ImageIcon("src/main/java/org/techtrek/assets/referenceImages/smallBomb.jpg");
         Image image = img.getImage();
-        Image scaledImage = image.getScaledInstance(buttons[0].getWidth(), buttons[0].getHeight(), Image.SCALE_SMOOTH);
+        Image scaledImage = image.getScaledInstance(buttons[0][0].getWidth(), buttons[0][0].getHeight(), Image.SCALE_SMOOTH);
         img = new ImageIcon(scaledImage);
 
         for (int i = 0; i < gridSizeX; i++) {
             for (int j = 0; j < gridSizeY; j++) {
                 if (isABtnAMine[i][j]) {
-                    buttons[i * 9 + j].setIcon(img);
+                    buttons[i][j].setIcon(img);
                 }
             }
         }
+        new NumberPlacer(buttons, gridSizeX, gridSizeY, isABtnAMine);
     }
 }
