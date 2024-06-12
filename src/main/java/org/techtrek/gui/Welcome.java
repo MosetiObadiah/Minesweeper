@@ -85,6 +85,7 @@ public class Welcome extends JPanel implements ActionListener {
             numberOfMines = 99;
             gridSizeX = 30;
             gridSizeY = 16;
+            //TODO make it so that buttons are bigger when board size increases
             frame.switchPanel(new MainGameWindow(numberOfMines, gridSizeX, gridSizeY));
 
         }

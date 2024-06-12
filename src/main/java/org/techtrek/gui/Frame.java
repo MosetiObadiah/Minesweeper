@@ -6,7 +6,7 @@ import java.awt.*;
 public class Frame extends JFrame {
     public Frame() {
         setTitle("Minesweeper");
-        setLocation(200, 100);
+        setLocation(50, 50);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         //TODO change default size of panel depending on the number of mines
         setSize(new Dimension(500, 600));
