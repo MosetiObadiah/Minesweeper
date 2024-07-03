@@ -1,28 +1,35 @@
 package org.techtrek.logic;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.util.ArrayList;
 import java.util.Random;
+
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
+import org.techtrek.logic.Board.Minebuttons;
 
 public class MinePlacer {
 
+    static ArrayList<Board.Minebuttons> mineList;
     Random random = new Random();
     int numberOfMines;
-    ImageIcon img;
 
     int gridSizeX;
     int gridSizeY;
 
-    JButton[][] buttons;
+    static JButton[][] buttons;
 
-    public MinePlacer(JButton[][] buttons, int numberOfMines, int gridSizeX, int gridSizeY, String buttonPosition) {
+    public MinePlacer(Board.Minebuttons[][] buttons, int numberOfMines, int gridSizeX, int gridSizeY) {
         this.gridSizeX = gridSizeX;
         this.gridSizeY = gridSizeY;
         this.numberOfMines = numberOfMines;
         this.buttons = buttons;
+        this.mineList = new ArrayList<>();
 
         Boolean[][] isABtnAMine = new Boolean[gridSizeX][gridSizeY];
-        
+
         for (int i = 0; i < gridSizeX; i++) {
             for (int j = 0; j < gridSizeY; j++) {
                 isABtnAMine[i][j] = false;
@@ -34,32 +41,36 @@ public class MinePlacer {
             int row = random.nextInt(gridSizeX);
             int col = random.nextInt(gridSizeY);
             if (!isABtnAMine[row][col]) {
+                mineList.add(buttons[row][col]);
                 isABtnAMine[row][col] = true;
                 minesPlaced++;
             }
         }
-
-        img = new ImageIcon("src/main/java/org/techtrek/assets/referenceImages/bomb-svgrepo-com.png");
-        Image image = img.getImage();
-        Image scaledImage = image.getScaledInstance(buttons[0][0].getWidth(), buttons[0][0].getHeight(), Image.SCALE_FAST);
-        img = new ImageIcon(scaledImage);
-
-        for (int i = 0; i < gridSizeX; i++) {
-            for (int j = 0; j < gridSizeY; j++) {
-                if (isABtnAMine[i][j]) {
-                    buttons[i][j].setIcon(img);
-                    buttons[i][j].setForeground(Color.BLACK);
-                }
-            }
-        }
-        new NumberPlacer(buttons, gridSizeX, gridSizeY, isABtnAMine);
-
+        
+        // new NumberPlacer(buttons, gridSizeX, gridSizeY, isABtnAMine);
     }
 
-    public void checkIfUserClickedMine(Boolean isFirstClick, JButton clickedBtn) {
-        if(!isFirstClick && clickedBtn.getIcon() != null){
+    static void revealMines(){
+        for (int i = 0; i < mineList.size(); i++) {
+            Board.Minebuttons button = mineList.get(i);
+            button.setText("💣");
+            button.setForeground(Color.BLACK);
+            button.setFont(new Font("Arial Unicode MS", Font.PLAIN, 25));
+        }
+        JOptionPane.showMessageDialog(null, "Game Over");
+        for (int i = 0; i < buttons.length; i++) {
+            for (int j = 0; j < buttons.length; j++) {
+                Minebuttons thisbuttons=(Minebuttons) buttons[i][j];
+                thisbuttons.setEnabled(false);
+            }
+        }
+    }
+
+    
+   /*  public void checkIfUserClickedMine(Boolean isFirstClick, JButton clickedBtn) {
+        if (!isFirstClick && clickedBtn.getIcon() != null) {
             JOptionPane.showMessageDialog(null, "Game Over");
             //TODO reset or end game after user fails
         }
-    }
+    }*/
 }
