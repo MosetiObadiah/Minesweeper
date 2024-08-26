@@ -10,7 +10,6 @@ public class Frame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         //TODO change default size of panel depending on the number of mines
         setSize(new Dimension(500, 600));
-
         setVisible(true);
     }
 

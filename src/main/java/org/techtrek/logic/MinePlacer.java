@@ -47,7 +47,6 @@ public class MinePlacer {
             }
         }
         
-        // new NumberPlacer(buttons, gridSizeX, gridSizeY, isABtnAMine);
     }
 
     static void revealMines(){
@@ -66,11 +65,4 @@ public class MinePlacer {
         }
     }
 
-    
-   /*  public void checkIfUserClickedMine(Boolean isFirstClick, JButton clickedBtn) {
-        if (!isFirstClick && clickedBtn.getIcon() != null) {
-            JOptionPane.showMessageDialog(null, "Game Over");
-            //TODO reset or end game after user fails
-        }
-    }*/
 }

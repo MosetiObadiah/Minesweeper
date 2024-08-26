@@ -95,7 +95,7 @@ public class MainGameWindow extends JPanel implements ActionListener {
         gameArea = new JPanel();
         gameArea.setBackground(Color.green);
         //draw to the board
-        board = new Board(gameArea, gridSizeX, gridSizeY,gameTimer, numberOfMines,resetFieldBtn);
+        board = new Board(gameArea, gridSizeX, gridSizeY,gameTimer, numberOfMines,resetFieldBtn,displayNumberOfMines);
         add(gameArea, BorderLayout.CENTER);
     }
 
@@ -112,12 +112,7 @@ public class MainGameWindow extends JPanel implements ActionListener {
 
         } else if (clickedBtn == gameOptionsBtn) {
             new ShowDialog().dialog(window, "Menu", new ButtonPanel());
-
-        } else if (clickedBtn == resetFieldBtn) {
-            //TODO add reset Logic
-            //Board.resetGame();
         }
     }
-
-  
+ 
 }

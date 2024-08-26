@@ -11,19 +11,20 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.SwingUtilities;
 
 public class Board implements ActionListener {
 
     int gridSizeX;
     int gridSizeY;
     int numberOfMines;
+    int remainingMines;
     JPanel panel;
 
     Timer timer;
     int elapsedTime;
     String timeFormatted;
     JLabel timerLabel;
-    boolean notClicked = true;
 
     Minebuttons button;
     Minebuttons[][] tiles;
@@ -31,6 +32,9 @@ public class Board implements ActionListener {
     MinePlacer minePlacer;
 
     JButton resetfieldButton;
+    JLabel displayNoOfminesJLabel;
+
+    int count;
 
     class Minebuttons extends JButton {
 
@@ -42,14 +46,16 @@ public class Board implements ActionListener {
         }
     }
 
-    public Board(JPanel panel, int gridSizeX, int gridSizeY, JLabel timerLabel, int numberOfMines, JButton resetfieldButton) {
+    public Board(JPanel panel, int gridSizeX, int gridSizeY, JLabel timerLabel, int numberOfMines, JButton resetfieldButton,JLabel displayNoOfminesJLabel) {
         this.panel = panel;
         this.gridSizeY = gridSizeY;
         this.numberOfMines = numberOfMines;
+        this.remainingMines = numberOfMines;
         this.gridSizeX = gridSizeX;
         this.timerLabel = timerLabel;
         this.tiles = new Minebuttons[gridSizeX][gridSizeY];
         this.resetfieldButton = resetfieldButton;
+        this.displayNoOfminesJLabel=displayNoOfminesJLabel;
 
         panel.setLayout(new GridLayout(gridSizeX, gridSizeY));
 
@@ -64,9 +70,9 @@ public class Board implements ActionListener {
                     @Override
                     public void mousePressed(MouseEvent e) {
                         Minebuttons button = (Minebuttons) e.getSource();
-                        if (e.getButton() == MouseEvent.BUTTON1) {
+                        if (SwingUtilities.isLeftMouseButton(e)) {
+                            System.out.println("left click detected");
                             if ("".equals(button.getText())) {
-                                // if it contains a mine, reveal all the other mines
                                 if (MinePlacer.mineList.contains(button)) {
                                     timer.stop();
                                     MinePlacer.revealMines();
@@ -77,6 +83,17 @@ public class Board implements ActionListener {
                                 } else {
                                     checkAdjacentMines(button.r, button.c);
                                 }
+                            } 
+                        }else if (SwingUtilities.isRightMouseButton(e)) {
+                            System.out.println("Right click detected");
+                            if ("".equals(button.getText())) {
+                                button.setText("🚩");
+                                remainingMines--;
+                                displayNoOfminesJLabel.setText(Integer.toString(remainingMines));
+                            } else if ("🚩".equals(button.getText())) {
+                                button.setText("");
+                                remainingMines++;
+                                displayNoOfminesJLabel.setText(Integer.toString(remainingMines));
                             }
                         }
                     }
@@ -159,12 +176,12 @@ public class Board implements ActionListener {
     void resetGame() {
         for (int r = 0; r < gridSizeX; r++) {
             for (int c = 0; c < gridSizeY; c++) {
-                Minebuttons thisButton = tiles[r][c];
-                thisButton.setEnabled(true);
-                thisButton.setText("");
+                tiles[r][c].setEnabled(true);
+                tiles[r][c].setText("");
             }
         }
         elapsedTime = 0;
+        numberOfMines=remainingMines;
         timer.restart();
         placeMines();
     }
